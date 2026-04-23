@@ -42,7 +42,7 @@ def info_parameter(id: int | None):
     elif id == 2:
         var_mensaje = "Leche"
     else:
-        var_mensaje = "Producto no existe1"
+        var_mensaje = "Producto no existe12"
 
     return {"mensaje": var_mensaje }
 
