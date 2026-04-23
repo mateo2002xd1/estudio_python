@@ -1,50 +1,24 @@
 from fastapi import FastAPI, Query, APIRouter
-
-var_mensaje : str
+from services.productos_service import (
+    producto,
+    post_ingresar_producto,
+    get_mostrar_productos,
+    get_mostrar_producto_codigo
+)
 
 app = FastAPI()
-
 router = APIRouter(prefix="/api")
 
-@router.get("/") 
-def read_root():
-    var_mensaje = "Hola mundo"
-    return {"mensaje": var_mensaje}
+@router.post("/producto")
+def post_ingresar_producto_endpoint(producto_test: producto):
+        return post_ingresar_producto(producto_test)
 
-@router.get("/saludo")
-def saludo():
-    var_mensaje = "mateo"
-    return {"mensaje": var_mensaje}
+@router.get("/productos")
+def get_mostrar_productos_endpoint():
+        return get_mostrar_productos()
 
-@router.get("/usuario/{id}")
-def info_parameter(id: int):
-    if id == 1:
-        var_mensaje = "Mateo"
-    elif id == 2:
-        var_mensaje = "Sebastian"
-    else:
-        var_mensaje = "User not Found"
-
-    return {"mensaje": var_mensaje }
-
-@router.get("/buscar")
-def buscar(nombre: str | None = Query(default=None)):
-    if nombre is None:
-        var_mensaje = ""
-    else:
-        var_mensaje = nombre
-    return {"mensaje": var_mensaje }
-
-@router.get("/producto/{id}")
-def info_parameter(id: int | None):
-    if id == 1:
-        var_mensaje = "Arroz"
-    elif id == 2:
-        var_mensaje = "Leche"
-    else:
-        var_mensaje = "Producto no existe123"
-
-    return {"mensaje": var_mensaje }
-
+@router.get("/producto_db/{codigo}")
+def get_mostrar_producto_codigo_endpoint(codigo: int):
+    return get_mostrar_producto_codigo(codigo)
 
 app.include_router(router)

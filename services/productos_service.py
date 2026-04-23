@@ -1,30 +1,19 @@
-from fastapi import FastAPI, Query, APIRouter
-from pydantic import BaseModel
+from models.productos import producto
 
-class producto(BaseModel):
-    codigo: int
-    nombre: str
-    precio: float
+productos_db = []
 
-app = FastAPI()
-
-productos = []
-
-@app.post("/producto")
 def post_ingresar_producto(producto_test: producto):
-    for u in productos:
+    for u in productos_db:
         if u.codigo == producto_test.codigo:
             return {"status": "error","message": "Producto repetido"}
-    productos.append(producto_test)
+    productos_db.append(producto_test)
     return {"status": "ok", "data": "Se guardo correctamente el producto"}
 
-@app.get("/productos")
 def get_mostrar_productos():
-    return {"status": "ok", "data": productos}
+    return {"status": "ok", "data": productos_db}
 
-@app.get("/producto/{codigo}")
 def get_mostrar_producto_codigo(codigo: int):
-    for test_producto in productos:
+    for test_producto in productos_db:
         if test_producto.codigo == codigo:
             return {"status": "ok", "data": test_producto}
     return {"status": "error","message": "no encontrado"}
