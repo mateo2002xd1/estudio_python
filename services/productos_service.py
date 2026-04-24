@@ -1,4 +1,4 @@
-from models.productos import producto, usuario
+from models.productos import producto
 
 productos_db = []
 
@@ -18,9 +18,10 @@ def get_mostrar_producto_codigo(codigo: int):
             return {"status": "ok", "data": test_producto}
     return {"status": "error","message": "no encontrado"}
 
-def post_ingreso_usuario(usuario_recibe: usuario):
-    if not usuario_recibe.nombre:
-        return {"status": "error","message": "Nombre esta vacio"}
-    if usuario_recibe.edad < 0:
-        return {"status": "error","message": "Edad es negativa"}
-    return {"status": "ok", "data": usuario_recibe}
+def put_reemplazar_producto(codigo: int, producto_body: producto):  
+    producto_body.codigo = codigo
+    for i, producto_buscar in enumerate(productos_db):
+        if producto_buscar.codigo == codigo:
+            productos_db[i] = producto_body
+            return {"status": "ok", "data": producto_buscar}
+    return {"status": "error","message": "no encontrado"}
