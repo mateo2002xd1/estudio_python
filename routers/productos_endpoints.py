@@ -1,31 +1,31 @@
 from fastapi import APIRouter
 from services.productos_service import (
-    post_ingresar_producto,
-    get_mostrar_productos,
-    get_mostrar_producto_codigo,
-    put_reemplazar_producto,
-    delete_eliminar_producto
+    ingresar_producto,
+    mostrar_productos,
+    mostrar_producto_codigo,
+    reemplazar_producto,
+    eliminar_producto
 )
 from models.productos import producto
 
 router = APIRouter(prefix="/productos")
 
 @router.post("/")
-def post_ingresar_producto_endpoint(producto_test: producto):
-        return post_ingresar_producto(producto_test)
+def ingresar_producto_endpoint(producto_test: producto):
+        return ingresar_producto(producto_test)
 
 @router.get("/")
-def get_mostrar_productos_endpoint():
-        return get_mostrar_productos()
+def mostrar_productos_endpoint():
+        return mostrar_productos()
 
 @router.get("/{codigo}")
-def get_mostrar_producto_codigo_endpoint(codigo: int):
-    return get_mostrar_producto_codigo(codigo)
+def mostrar_producto_codigo_endpoint(codigo: int):
+    return mostrar_producto_codigo(codigo)
 
 @router.put("/{codigo}")
-def put_reemplazar_producto_endpoint(codigo: int, producto_body: producto):
-    return put_reemplazar_producto(codigo, producto_body)
+def reemplazar_producto_endpoint(codigo: int, producto_body: producto):
+    return reemplazar_producto(codigo, producto_body)
 
 @router.delete("/{codigo}")
-def delete_eliminar_producto_endpoint(codigo: int):
-      return delete_eliminar_producto(codigo)
+def eliminar_producto_endpoint(codigo: int):
+      return eliminar_producto(codigo)
