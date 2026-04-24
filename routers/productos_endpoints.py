@@ -3,7 +3,8 @@ from services.productos_service import (
     post_ingresar_producto,
     get_mostrar_productos,
     get_mostrar_producto_codigo,
-    put_reemplazar_producto
+    put_reemplazar_producto,
+    delete_eliminar_producto
 )
 from models.productos import producto
 
@@ -24,3 +25,7 @@ def get_mostrar_producto_codigo_endpoint(codigo: int):
 @router.put("/{codigo}")
 def put_reemplazar_producto_endpoint(codigo: int, producto_body: producto):
     return put_reemplazar_producto(codigo, producto_body)
+
+@router.delete("/{codigo}")
+def delete_eliminar_producto_endpoint(codigo: int):
+      return delete_eliminar_producto(codigo)

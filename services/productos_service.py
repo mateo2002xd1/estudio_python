@@ -19,9 +19,18 @@ def get_mostrar_producto_codigo(codigo: int):
     return {"status": "error","message": "no encontrado"}
 
 def put_reemplazar_producto(codigo: int, producto_body: producto):  
-    producto_body.codigo = codigo
+    producto_correcto = producto_body.model_copy()
+    producto_correcto.codigo = codigo
     for i, producto_buscar in enumerate(productos_db):
         if producto_buscar.codigo == codigo:
-            productos_db[i] = producto_body
-            return {"status": "ok", "data": producto_buscar}
+            productos_db[i] = producto_correcto
+            return {"status": "ok", "data": productos_db[i]}
     return {"status": "error","message": "no encontrado"}
+
+
+def delete_eliminar_producto(codigo: int):
+    producto_existe = next((p for p in productos_db if p.codigo == codigo), None)
+    if not producto_existe:
+        return {"status": "error","message": "no encontrado"}
+    productos_db.remove(producto_existe)
+    return {"status": "ok", "data": "Se elimino el producto"}
