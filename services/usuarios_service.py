@@ -5,4 +5,4 @@ def ingreso_usuario(usuario_recibe: usuario):
         return {"status": "error", "data": [], "message": "Nombre esta vacio"}   
     if usuario_recibe.edad < 0:
         return {"status": "error", "data": [], "message": "Edad es negativa"}   
-    return {"status": "ok", "data": usuario_recibe, "message": ""}   
+    return {"status": "ok", "data": usuario_recibe, "message": "1"}   
