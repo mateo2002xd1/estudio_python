@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 from services.productos_service import (
-    producto,
     post_ingresar_producto,
     get_mostrar_productos,
     get_mostrar_producto_codigo
 )
+from models.productos import producto
 
 router = APIRouter(prefix="/productos")
 
