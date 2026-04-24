@@ -1,0 +1,21 @@
+from fastapi import APIRouter
+from services.productos_service import (
+    producto,
+    post_ingresar_producto,
+    get_mostrar_productos,
+    get_mostrar_producto_codigo
+)
+
+router = APIRouter(prefix="/productos")
+
+@router.post("/ingresar")
+def post_ingresar_producto_endpoint(producto_test: producto):
+        return post_ingresar_producto(producto_test)
+
+@router.get("/mostrar_all")
+def get_mostrar_productos_endpoint():
+        return get_mostrar_productos()
+
+@router.get("/mostrar_code/{codigo}")
+def get_mostrar_producto_codigo_endpoint(codigo: int):
+    return get_mostrar_producto_codigo(codigo)
