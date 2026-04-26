@@ -19,9 +19,10 @@ def ingresar_producto(producto_test: ProductoCreate, db: Session):
     )
     db.add(nuevo)
     db.commit()
+    db.refresh(nuevo)
     return {
             "status": "ok",
-            "data": producto_test,
+            "data": nuevo,
             "message": "Se guardó correctamente el producto"
         }
 
@@ -32,7 +33,7 @@ def mostrar_productos(db: Session):
         "message": "Lista completa de productos"
     }
 
-def mostrar_producto_codigo(codigo: int, db = Session):
+def mostrar_producto_codigo(codigo: int, db: Session):
     existe = db.query(Producto).filter(
         Producto.codigo == codigo
     ).first()
@@ -44,48 +45,43 @@ def mostrar_producto_codigo(codigo: int, db = Session):
                 "message": f"Producto codigo: {codigo}"
             }
     raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
+                    status_code=status.HTTP_404_NOT_FOUND,
                     detail="Producto no encontrado"
                 )
 
-def reemplazar_producto(codigo: int, producto_body: ProductoCreate, db = Session):  
-    existe = db.query(Producto).filter(
+def reemplazar_producto(codigo: int, producto_body: ProductoCreate, db: Session):  
+    producto = db.query(Producto).filter(
        Producto.codigo == codigo
     ).first()
 
-    if existe:
-        db.query(Producto).filter(
-            Producto.codigo == codigo
-        ).update({
-                    Producto.nombre: producto_body.nombre,
-                    Producto.precio: producto_body.precio
-                })
+    if producto:
+        producto.nombre = producto_body.nombre
+        producto.precio = producto_body.precio
+
         db.commit()
+        db.refresh(producto)
         return {
             "status": "ok",
-            "data": db.query(Producto).filter(Producto.codigo == codigo).first(),
+            "data": producto,
             "message": f"Reemplazo del Producto codigo: {codigo}"
         }
     raise HTTPException(
-                        status_code=status.HTTP_400_BAD_REQUEST,
+                        status_code=status.HTTP_404_NOT_FOUND,
                         detail="Producto no encontrado"
                     )
 
 def eliminar_producto(codigo: int, db: Session):
-    existe = db.query(Producto).filter(
+    producto = db.query(Producto).filter(
         Producto.codigo == codigo
     ).first()
     
-    if not existe:
+    if not producto:
         raise HTTPException(
-                            status_code=status.HTTP_400_BAD_REQUEST,
+                            status_code=status.HTTP_404_NOT_FOUND,
                             detail="Producto no encontrado"
                         )
     
-    db.query(Producto).filter(
-        Producto.codigo == codigo
-    ).delete()
-
+    db.delete(producto)
     db.commit()
 
     return {

@@ -16,7 +16,7 @@ SessionLocal = sessionmaker(
 
 Base = declarative_base()
 
-def get_db():
+def get_db_productos():
     db = SessionLocal()
     try:
         yield db

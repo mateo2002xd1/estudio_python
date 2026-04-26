@@ -7,10 +7,10 @@ from services.productos_service import (
     eliminar_producto
 )
 from models.productos import ProductoCreate
-from database import get_db
+from database import get_db_productos
 from sqlalchemy.orm import Session
 
-DBSession = Depends(get_db)
+DBSession = Depends(get_db_productos)
 
 router = APIRouter(prefix="/productos")
 
