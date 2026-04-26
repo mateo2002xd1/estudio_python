@@ -2,8 +2,6 @@ from pydantic import BaseModel, Field
 from database import Base
 from sqlalchemy import Column, Integer, String, Float
 
-productos_db = []
-
 class ProductoCreate(BaseModel):
     codigo: int = Field(gt=0)
     nombre: str = Field(min_length=1)
@@ -19,3 +17,9 @@ class Producto(Base):
     codigo = Column(Integer, primary_key=True, index=True)
     nombre = Column(String, nullable=False)
     precio = Column(Float, nullable=False)
+
+class Usuario(Base):
+    __tablename__ = "usuarios"
+    
+    nombre = Column(String, primary_key=True, index=True)
+    edad = Column(Integer, nullable=False)

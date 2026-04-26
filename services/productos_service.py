@@ -1,65 +1,93 @@
-from fastapi import HTTPException
-from models.productos import ProductoCreate, productos_db
+from fastapi import HTTPException, status
+from sqlalchemy.orm import Session
+from models.productos import Producto, ProductoCreate
 
-def ingresar_producto(producto_test: ProductoCreate):
-    for u in productos_db:
-        if u.codigo == producto_test.codigo:
-            raise HTTPException(
-                status_code=400,
-                detail="Producto repetido"
-            )
-    productos_db.append(producto_test)
+def ingresar_producto(producto_test: ProductoCreate, db: Session):
+    existe = db.query(Producto).filter(
+        Producto.codigo == producto_test.codigo
+    ).first()
+
+    if existe:
+        raise HTTPException(
+                    status_code=status.HTTP_409_CONFLICT,
+                    detail="Producto repetido"
+                )
+    data = producto_test.dict()
+
+    nuevo = Producto(
+        **data
+    )
+    db.add(nuevo)
+    db.commit()
+    return {
+            "status": "ok",
+            "data": producto_test,
+            "message": "Se guardó correctamente el producto"
+        }
+
+def mostrar_productos(db: Session):
     return {
         "status": "ok",
-        "data": producto_test,
-        "message": "Se guardó correctamente el producto"
-    }
-
-def mostrar_productos():
-    return {
-        "status": "ok",
-        "data": productos_db,
+        "data": db.query(Producto).all(),
         "message": "Lista completa de productos"
     }
 
-def mostrar_producto_codigo(codigo: int):
-    for test_producto in productos_db:
-        if test_producto.codigo == codigo:
-            return {
+def mostrar_producto_codigo(codigo: int, db = Session):
+    existe = db.query(Producto).filter(
+        Producto.codigo == codigo
+    ).first()
+    
+    if existe:
+        return {
                 "status": "ok",
-                "data": test_producto,
+                "data": existe,
                 "message": f"Producto codigo: {codigo}"
             }
     raise HTTPException(
-                    status_code=400,
+                    status_code=status.HTTP_400_BAD_REQUEST,
                     detail="Producto no encontrado"
                 )
 
-def reemplazar_producto(codigo: int, producto_body: ProductoCreate):  
-    producto_correcto = producto_body.model_copy()
-    producto_correcto.codigo = codigo
-    for i, producto_buscar in enumerate(productos_db):
-        if producto_buscar.codigo == codigo:
-            productos_db[i] = producto_correcto
-            return {
-                    "status": "ok",
-                    "data": productos_db[i],
-                    "message": f"Reemplado del Producto codigo: {codigo}"
-                }
+def reemplazar_producto(codigo: int, producto_body: ProductoCreate, db = Session):  
+    existe = db.query(Producto).filter(
+       Producto.codigo == codigo
+    ).first()
+
+    if existe:
+        db.query(Producto).filter(
+            Producto.codigo == codigo
+        ).update({
+                    Producto.nombre: producto_body.nombre,
+                    Producto.precio: producto_body.precio
+                })
+        db.commit()
+        return {
+            "status": "ok",
+            "data": db.query(Producto).filter(Producto.codigo == codigo).first(),
+            "message": f"Reemplazo del Producto codigo: {codigo}"
+        }
     raise HTTPException(
-                        status_code=400,
+                        status_code=status.HTTP_400_BAD_REQUEST,
                         detail="Producto no encontrado"
                     )
 
-
-def eliminar_producto(codigo: int):
-    producto_existe = next((p for p in productos_db if p.codigo == codigo), None)
-    if not producto_existe:
+def eliminar_producto(codigo: int, db: Session):
+    existe = db.query(Producto).filter(
+        Producto.codigo == codigo
+    ).first()
+    
+    if not existe:
         raise HTTPException(
-                            status_code=400,
+                            status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Producto no encontrado"
                         )
-    productos_db.remove(producto_existe)
+    
+    db.query(Producto).filter(
+        Producto.codigo == codigo
+    ).delete()
+
+    db.commit()
+
     return {
         "status": "ok",
         "data": [],
