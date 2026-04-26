@@ -1,7 +1,7 @@
-from models.productos import usuario
+from models.productos import UsuarioCreate
 from fastapi import HTTPException
 
-def ingreso_usuario(usuario_recibe: usuario):
+def ingreso_usuario(usuario_recibe: UsuarioCreate):
     if not usuario_recibe.nombre:
         raise HTTPException(
             status_code=400,

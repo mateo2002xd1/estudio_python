@@ -1,7 +1,7 @@
 from fastapi import HTTPException
-from models.productos import producto, productos_db
+from models.productos import ProductoCreate, productos_db
 
-def ingresar_producto(producto_test: producto):
+def ingresar_producto(producto_test: ProductoCreate):
     for u in productos_db:
         if u.codigo == producto_test.codigo:
             raise HTTPException(
@@ -35,7 +35,7 @@ def mostrar_producto_codigo(codigo: int):
                     detail="Producto no encontrado"
                 )
 
-def reemplazar_producto(codigo: int, producto_body: producto):  
+def reemplazar_producto(codigo: int, producto_body: ProductoCreate):  
     producto_correcto = producto_body.model_copy()
     producto_correcto.codigo = codigo
     for i, producto_buscar in enumerate(productos_db):
