@@ -1,9 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from services.usuarios_service import ingreso_usuario
-from schemas.productos_schema import UsuarioInput
+from schemas.usuarios_schema import UsuarioCrear, UsuarioResponse
+from sqlalchemy.orm import Session
+from database import get_db
 
 router = APIRouter(prefix="/api/usuarios")
 
-@router.post("/")
-def ingreso_usuario_endpoint(usuario_ingresar: UsuarioInput):
-    return ingreso_usuario(usuario_ingresar)
+@router.post("/", response_model=UsuarioResponse)
+def ingreso_usuario_endpoint(usuario_ingresar: UsuarioCrear, db: Session = Depends(get_db)):
+    return ingreso_usuario(usuario_ingresar, db)

@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from models.productos_db import Producto
-from schemas.productos_schema import ProductoInput, ProductoResponse 
+from schemas.productos_schema import ProductoInput 
 
 def ingresar_producto(producto_test: ProductoInput, db: Session):
     existe = db.query(Producto).filter(
