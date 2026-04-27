@@ -1,8 +1,9 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-from models.productos import Producto, ProductoCreate
+from models.productos_db import Producto
+from schemas.productos_schema import ProductoInput, ProductoResponse 
 
-def ingresar_producto(producto_test: ProductoCreate, db: Session):
+def ingresar_producto(producto_test: ProductoInput, db: Session):
     existe = db.query(Producto).filter(
         Producto.codigo == producto_test.codigo
     ).first()
@@ -12,7 +13,7 @@ def ingresar_producto(producto_test: ProductoCreate, db: Session):
                     status_code=status.HTTP_409_CONFLICT,
                     detail="Producto repetido"
                 )
-    data = producto_test.dict()
+    data = producto_test.model_dump()
 
     nuevo = Producto(
         **data
@@ -20,18 +21,10 @@ def ingresar_producto(producto_test: ProductoCreate, db: Session):
     db.add(nuevo)
     db.commit()
     db.refresh(nuevo)
-    return {
-            "status": "ok",
-            "data": nuevo,
-            "message": "Se guardó correctamente el producto"
-        }
+    return nuevo
 
 def mostrar_productos(db: Session):
-    return {
-        "status": "ok",
-        "data": db.query(Producto).all(),
-        "message": "Lista completa de productos"
-    }
+    return db.query(Producto).all()
 
 def mostrar_producto_codigo(codigo: int, db: Session):
     existe = db.query(Producto).filter(
@@ -39,17 +32,13 @@ def mostrar_producto_codigo(codigo: int, db: Session):
     ).first()
     
     if existe:
-        return {
-                "status": "ok",
-                "data": existe,
-                "message": f"Producto codigo: {codigo}"
-            }
+        return existe
     raise HTTPException(
                     status_code=status.HTTP_404_NOT_FOUND,
                     detail="Producto no encontrado"
                 )
 
-def reemplazar_producto(codigo: int, producto_body: ProductoCreate, db: Session):  
+def reemplazar_producto(codigo: int, producto_body: ProductoInput, db: Session):  
     producto = db.query(Producto).filter(
        Producto.codigo == codigo
     ).first()
@@ -60,11 +49,7 @@ def reemplazar_producto(codigo: int, producto_body: ProductoCreate, db: Session)
 
         db.commit()
         db.refresh(producto)
-        return {
-            "status": "ok",
-            "data": producto,
-            "message": f"Reemplazo del Producto codigo: {codigo}"
-        }
+        return producto
     raise HTTPException(
                         status_code=status.HTTP_404_NOT_FOUND,
                         detail="Producto no encontrado"
@@ -84,8 +69,4 @@ def eliminar_producto(codigo: int, db: Session):
     db.delete(producto)
     db.commit()
 
-    return {
-        "status": "ok",
-        "data": [],
-        "message": "Se elimino el producto"
-    }
+    return  producto

@@ -6,31 +6,29 @@ from services.productos_service import (
     reemplazar_producto,
     eliminar_producto
 )
-from models.productos import ProductoCreate
+from schemas.productos_schema import ProductoInput, ProductoResponse
 from database import get_db_productos
 from sqlalchemy.orm import Session
 
-DBSession = Depends(get_db_productos)
-
-router = APIRouter(prefix="/productos")
+router = APIRouter(prefix="/api/productos")
 
 
-@router.post("/")
-def ingresar_producto_endpoint(producto_test: ProductoCreate, db: Session = DBSession):
+@router.post("/", response_model=ProductoResponse)
+def ingresar_producto_endpoint(producto_test: ProductoInput, db: Session = Depends(get_db_productos)):
         return ingresar_producto(producto_test, db)
 
-@router.get("/")
-def mostrar_productos_endpoint(db: Session = DBSession):
+@router.get("/", response_model=list[ProductoResponse])
+def mostrar_productos_endpoint(db: Session = Depends(get_db_productos)):
         return mostrar_productos(db)
 
-@router.get("/{codigo}")
-def mostrar_producto_codigo_endpoint(codigo: int, db: Session = DBSession):
+@router.get("/{codigo}", response_model=ProductoResponse)
+def mostrar_producto_codigo_endpoint(codigo: int, db: Session = Depends(get_db_productos)):
     return mostrar_producto_codigo(codigo, db)
 
-@router.put("/{codigo}")
-def reemplazar_producto_endpoint(codigo: int, producto_body: ProductoCreate, db: Session = DBSession):
+@router.put("/{codigo}", response_model=ProductoResponse)
+def reemplazar_producto_endpoint(codigo: int, producto_body: ProductoInput, db: Session = Depends(get_db_productos)):
     return reemplazar_producto(codigo, producto_body, db)
 
-@router.delete("/{codigo}")
-def eliminar_producto_endpoint(codigo: int, db: Session = DBSession):
+@router.delete("/{codigo}", response_model=ProductoResponse)
+def eliminar_producto_endpoint(codigo: int, db: Session = Depends(get_db_productos)):
       return eliminar_producto(codigo, db)
