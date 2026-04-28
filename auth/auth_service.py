@@ -3,8 +3,22 @@ from models.usuarios_db import Usuario
 from schemas.usuarios_schema import UsuarioRegistro, UsuarioLogin
 from passlib.context import CryptContext
 from fastapi import HTTPException, status
+from jose import jwt
+from config import SECRET_KEY, ALGORITHM, EXPIRACION_MINUTOS
+from datetime import datetime, timedelta
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def crear_token(data: dict):
+    to_create = data.copy()
+    
+    expire = datetime.utcnow() + timedelta(minutes=EXPIRACION_MINUTOS)
+
+    to_create.update({"exp": expire})
+
+    token = jwt.encode(to_create, SECRET_KEY, algorithm=ALGORITHM)
+
+    return token
 
 def usuario_consulta(id: int, db: Session):
     return db.query(Usuario).filter(Usuario.id == id).first()
@@ -42,6 +56,7 @@ def login_usuario(id: int, usuario_login: UsuarioLogin, db: Session):
                     )  
         
         if pwd_context.verify(usuario_login.password, usuario.password_hash):
+            print(crear_token({"sub": str(usuario.id)}))
             return usuario
         
         raise HTTPException(
