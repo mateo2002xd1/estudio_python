@@ -19,7 +19,8 @@ def ingreso_usuario(usuario_ingresar: UsuarioCrear, db: Session):
     nuevo = Usuario(
         **data
     )
-
+    nuevo.usuario = nuevo.id
+    
     db.add(nuevo)
     db.commit()
     db.refresh(nuevo)

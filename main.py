@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from routers.productos_endpoints import router as productos_router
+from routers.auth_endpoints import router as auth_router
 from routers.usuarios_endpoints import router as usuarios_router
 from database import Base, engine
 from models.productos_db import Producto
@@ -13,3 +14,4 @@ def on_startup():
 
 app.include_router(productos_router)
 app.include_router(usuarios_router)
+app.include_router(auth_router)

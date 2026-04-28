@@ -9,21 +9,17 @@ class UsuarioCrear(BaseModel):
 
 class UsuarioRegistro(BaseModel):
     
-    id: int = Field(gt=0)
-    usuario: str = Field(min_length=1)
-    password_hash: str = Field(min_length=1)
+    password: str = Field(min_length=4)
 
 class UsuarioLogin(BaseModel):
     
-    id: int = Field(gt=0)
-    usuario: str = Field(min_length=1)
-    password_hash: str = Field(min_length=1)
+    password: str = Field(min_length=4)
 
 class UsuarioResponse(BaseModel):
     id: int
     nombre: str
     edad: int
-    usuario: Optional[str] = None
+    usuario: int
 
     class Config:
         from_attributes = True
