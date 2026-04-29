@@ -1,7 +1,7 @@
-from schemas.usuarios_schema import UsuarioCrear
+from app.schemas.usuarios_schema import UsuarioCrear
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-from models.usuarios_db import Usuario
+from app.models.usuarios_db import Usuario
 
 def ingreso_usuario(usuario_ingresar: UsuarioCrear, db: Session):
     existe = db.query(Usuario).filter(

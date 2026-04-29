@@ -1,15 +1,15 @@
 from fastapi import APIRouter, Depends
-from services.productos_service import (
+from app.services.productos_service import (
     ingresar_producto,
     mostrar_productos_codigo,
     mostrar_producto_filtros,
     reemplazar_producto,
     eliminar_producto
 )
-from schemas.productos_schema import ProductoInput, ProductoResponse
-from database import get_db
+from app.schemas.productos_schema import ProductoInput, ProductoResponse
+from app.database import get_db
 from sqlalchemy.orm import Session
-from auth.auth_dependencia import get_current_user
+from app.auth.auth_dependencia import get_current_user
 
 router = APIRouter(prefix="/api/productos")
 

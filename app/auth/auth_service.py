@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
-from models.usuarios_db import Usuario
-from schemas.usuarios_schema import UsuarioRegistro, UsuarioLogin
+from app.models.usuarios_db import Usuario
+from app.schemas.usuarios_schema import UsuarioRegistro, UsuarioLogin
 from passlib.context import CryptContext
 from fastapi import HTTPException, status
 from jose import jwt
-from config import SECRET_KEY, ALGORITHM, EXPIRACION_MINUTOS
+from app.config import SECRET_KEY, ALGORITHM, EXPIRACION_MINUTOS
 from datetime import datetime, timedelta
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -54,7 +54,6 @@ def login_usuario(id: int, usuario_login: UsuarioLogin, db: Session):
                         status_code=status.HTTP_400_BAD_REQUEST,
                         detail="Usuario no esta registrado"
                     )  
-        
         if pwd_context.verify(usuario_login.password, usuario.password_hash):
             print(crear_token({"sub": str(usuario.id)}))
             return usuario
