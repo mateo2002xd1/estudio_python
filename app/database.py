@@ -5,7 +5,7 @@ DATABASE_URL = "postgresql+psycopg2://postgres:1234@localhost:5432/fastapi_db"
 
 engine = create_engine(
     DATABASE_URL,
-    echo=True
+    echo=False
 )
 
 SessionLocal = sessionmaker(

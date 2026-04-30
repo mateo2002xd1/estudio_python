@@ -1,0 +1,6 @@
+2026-04-30 10:36:58,142 | INFO | app.core.logger | 200. Usuario consultado
+2026-04-30 10:36:58,146 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-04-30 10:39:04,219 | INFO | app.core.logger | 200. Usuario consultado
+2026-04-30 10:39:04,224 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-04-30 10:39:19,583 | INFO | app.core.logger | 200. Usuario consultado
+2026-04-30 10:39:19,585 | ERROR | app.core.logger | 409. Usuario ya esta registrado

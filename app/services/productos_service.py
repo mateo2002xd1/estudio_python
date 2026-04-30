@@ -2,6 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from app.models.productos_db import Producto
 from app.schemas.productos_schema import ProductoInput 
+from app.core.logger import logger
 
 def ingresar_producto(producto_test: ProductoInput, db: Session):
     existe = db.query(Producto).filter(
@@ -9,6 +10,7 @@ def ingresar_producto(producto_test: ProductoInput, db: Session):
     ).first()
 
     if existe:
+        logger.error("409. Producto repetido")
         raise HTTPException(
                     status_code=status.HTTP_409_CONFLICT,
                     detail="Producto repetido"
@@ -21,14 +23,18 @@ def ingresar_producto(producto_test: ProductoInput, db: Session):
     db.add(nuevo)
     db.commit()
     db.refresh(nuevo)
+    
+    logger.info("200. Producto registrado")
     return nuevo
 
 def mostrar_productos_codigo(codigo: int, db: Session):
     productos = db.query(Producto).filter(Producto.codigo == codigo).first()
     
     if productos:
+        logger.info("200. Productos filtrados")
         return productos
     
+    logger.error("404. Producto no encontrado")
     raise HTTPException(
                         status_code=status.HTTP_404_NOT_FOUND,
                         detail="Producto no encontrado"
@@ -69,8 +75,10 @@ def mostrar_producto_filtros(
     productos = productos.all()
 
     if productos:
+        logger.error("200. Productos filtrados")
         return productos
     
+    logger.error("404. Productos no encontrado")
     raise HTTPException(
                         status_code=status.HTTP_404_NOT_FOUND,
                         detail="Productos no encontrado"
@@ -87,7 +95,11 @@ def reemplazar_producto(codigo: int, producto_body: ProductoInput, db: Session):
 
         db.commit()
         db.refresh(producto)
+        
+        logger.info("200. Producto reemplazado")
         return producto
+    
+    logger.error("404. Producto no encontrado")
     raise HTTPException(
                         status_code=status.HTTP_404_NOT_FOUND,
                         detail="Producto no encontrado"
@@ -99,6 +111,7 @@ def eliminar_producto(codigo: int, db: Session):
     ).first()
     
     if not producto:
+        logger.error("404. Producto no encontrado")
         raise HTTPException(
                             status_code=status.HTTP_404_NOT_FOUND,
                             detail="Producto no encontrado"
@@ -107,4 +120,5 @@ def eliminar_producto(codigo: int, db: Session):
     db.delete(producto)
     db.commit()
 
+    logger.info("200. Producto eliminado")
     return  producto
