@@ -1,10 +1,11 @@
-from fastapi import Depends, HTTPException
+from fastapi import Depends
 from sqlalchemy.orm import Session
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import jwt, JWTError
 from app.core.config import SECRET_KEY, ALGORITHM
 from app.database import get_db
-from app.models.usuarios_db import Usuario
+from app.core.exceptions import UsuarioYaNoExiste, TokenInvalido
+from app.repositories.usuarios_repositories import consultar_usuario_db
 
 security = HTTPBearer()
 
@@ -12,9 +13,9 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
     try:
         token = credentials.credentials
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        usuario = db.query(Usuario).filter(Usuario.id == int(payload["sub"])).first()
+        usuario = consultar_usuario_db(int(payload["sub"]), db)
         if usuario:    
             return usuario
-        raise HTTPException(status_code=401, detail="Usuario ya no existe")
+        raise UsuarioYaNoExiste()
     except JWTError:
-        raise HTTPException(status_code=401, detail="Token inválido")
+        raise TokenInvalido()

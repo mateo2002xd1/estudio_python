@@ -1,44 +1,48 @@
-from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from app.models.productos_db import Producto
-from app.schemas.productos_schema import ProductoInput 
+from app.schemas.productos_schema import ProductoInput, ProductoFiltro
 from app.core.logger import logger
+from app.repositories.productos_repositories import (
+        consultar_producto_db,
+        commit_products,
+        refrescar_producto,
+        eliminar_producto_db,
+        ingresar_producto_db,
+        preparar_consulta_productos,
+        agregar_filtro_nombre_productos,
+        agregar_filtro_precio_min_productos,
+        agregar_filtro_precio_max_productos,
+        agregar_offset_productos,
+        agregar_limit_productos,
+        realizar_busqueda_completa_productos
+    )
+from app.core.exceptions import ProductoNoEncontrado, ProductoRepetido
 
 def ingresar_producto(producto_test: ProductoInput, db: Session):
-    existe = db.query(Producto).filter(
-        Producto.codigo == producto_test.codigo
-    ).first()
+    existe = consultar_producto_db(producto_test.codigo, db)
 
     if existe:
         logger.error("409. Producto repetido")
-        raise HTTPException(
-                    status_code=status.HTTP_409_CONFLICT,
-                    detail="Producto repetido"
-                )
+        raise ProductoRepetido()
     data = producto_test.model_dump()
 
     nuevo = Producto(
         **data
     )
-    db.add(nuevo)
-    db.commit()
-    db.refresh(nuevo)
+    nuevo = ingresar_producto_db(nuevo, db)
     
     logger.info("200. Producto registrado")
     return nuevo
 
 def mostrar_productos_codigo(codigo: int, db: Session):
-    productos = db.query(Producto).filter(Producto.codigo == codigo).first()
+    productos = consultar_producto_db(codigo, db)
     
     if productos:
         logger.info("200. Productos filtrados")
         return productos
     
     logger.error("404. Producto no encontrado")
-    raise HTTPException(
-                        status_code=status.HTTP_404_NOT_FOUND,
-                        detail="Producto no encontrado"
-                    )
+    raise ProductoNoEncontrado()
 
 def mostrar_producto_filtros(
         db: Session,
@@ -49,76 +53,56 @@ def mostrar_producto_filtros(
         limit: int = 10
         ):  
 
-    productos = db.query(Producto)
+    productos = preparar_consulta_productos(db)
     
     if nombre is not None:
-        productos = productos.filter(
-            Producto.nombre.like(f"%{nombre}%")
-        ).order_by(Producto.nombre)
+        productos = agregar_filtro_nombre_productos(productos, f"%{nombre}%")
     
     if precio_min is not None:
-        productos = productos.filter(
-            Producto.precio >= precio_min
-        ).order_by(Producto.precio)
+        productos = agregar_filtro_precio_min_productos(productos, precio_min)
     
     if precio_max is not None:
-        productos = productos.filter(
-            Producto.precio <= precio_max
-        ).order_by(Producto.precio)
+        productos = agregar_filtro_precio_max_productos(productos, precio_max)
 
     if skip is not None:
-        productos = productos.offset(skip)
+        productos = agregar_offset_productos(productos, skip)
 
     if limit is not None:
-        productos = productos.limit(limit)
+        productos = agregar_limit_productos(productos, limit)
 
-    productos = productos.all()
+    productos = realizar_busqueda_completa_productos(productos)
 
     if productos:
-        logger.error("200. Productos filtrados")
+        logger.info("200. Productos filtrados")
         return productos
     
     logger.error("404. Productos no encontrado")
-    raise HTTPException(
-                        status_code=status.HTTP_404_NOT_FOUND,
-                        detail="Productos no encontrado"
-                    )
+    raise ProductoNoEncontrado()
 
 def reemplazar_producto(codigo: int, producto_body: ProductoInput, db: Session):  
-    producto = db.query(Producto).filter(
-       Producto.codigo == codigo
-    ).first()
+    producto = consultar_producto_db(codigo, db)
 
     if producto:
         producto.nombre = producto_body.nombre
         producto.precio = producto_body.precio
 
-        db.commit()
-        db.refresh(producto)
+        commit_products(db)
+        refrescar_producto(producto, db)
         
         logger.info("200. Producto reemplazado")
         return producto
     
     logger.error("404. Producto no encontrado")
-    raise HTTPException(
-                        status_code=status.HTTP_404_NOT_FOUND,
-                        detail="Producto no encontrado"
-                    )
+    raise ProductoNoEncontrado()
 
 def eliminar_producto(codigo: int, db: Session):
-    producto = db.query(Producto).filter(
-        Producto.codigo == codigo
-    ).first()
+    producto = consultar_producto_db(codigo, db)
     
     if not producto:
         logger.error("404. Producto no encontrado")
-        raise HTTPException(
-                            status_code=status.HTTP_404_NOT_FOUND,
-                            detail="Producto no encontrado"
-                        )
+        raise ProductoNoEncontrado()
     
-    db.delete(producto)
-    db.commit()
+    eliminar_producto_db(producto, db)
 
     logger.info("200. Producto eliminado")
     return  producto

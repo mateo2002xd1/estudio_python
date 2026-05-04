@@ -4,3 +4,137 @@
 2026-04-30 10:39:04,224 | ERROR | app.core.logger | 409. Usuario ya esta registrado
 2026-04-30 10:39:19,583 | INFO | app.core.logger | 200. Usuario consultado
 2026-04-30 10:39:19,585 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 14:54:37,977 | INFO | app.core.logger | 200. Usuario consultado
+2026-05-04 14:54:38,205 | INFO | app.core.logger | 200. Token generado
+2026-05-04 14:55:00,714 | ERROR | app.core.logger | 409. Producto repetido
+2026-05-04 14:55:05,240 | ERROR | app.core.logger | 409. Producto repetido
+2026-05-04 14:55:09,983 | ERROR | app.core.logger | 409. Producto repetido
+2026-05-04 14:55:44,501 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 14:55:57,517 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:00:38,971 | INFO | app.core.logger | 200. Producto registrado
+2026-05-04 15:00:43,411 | ERROR | app.core.logger | 409. Producto repetido
+2026-05-04 15:00:48,355 | INFO | app.core.logger | 200. Producto registrado
+2026-05-04 15:00:58,447 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:04:58,645 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:05:01,122 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:05:02,366 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:09:21,745 | ERROR | app.core.logger | 409. Producto repetido
+2026-05-04 15:09:26,258 | INFO | app.core.logger | 200. Producto registrado
+2026-05-04 15:12:54,239 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:12:57,074 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:14:50,684 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:19:55,928 | INFO | app.core.logger | 200. Producto registrado
+2026-05-04 15:29:04,039 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:29:13,165 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:31:56,175 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:32:02,105 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 15:58:17,778 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:04:53,155 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:05:47,569 | ERROR | app.core.logger | 404. Productos no encontrado
+2026-05-04 16:05:51,336 | ERROR | app.core.logger | 404. Productos no encontrado
+2026-05-04 16:05:54,204 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:05:59,517 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:06:03,235 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:06:06,411 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:06:11,547 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:13:48,234 | INFO | app.core.logger | 200. Usuario consultado
+2026-05-04 16:13:48,444 | INFO | app.core.logger | 200. Token generado
+2026-05-04 16:14:28,892 | INFO | app.core.logger | 200. Producto registrado
+2026-05-04 16:14:31,992 | ERROR | app.core.logger | 409. Producto repetido
+2026-05-04 16:15:18,403 | INFO | app.core.logger | 200. Producto reemplazado
+2026-05-04 16:16:09,262 | INFO | app.core.logger | 200. Producto reemplazado
+2026-05-04 16:21:44,402 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:21:46,408 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:21:53,783 | INFO | app.core.logger | 200. Producto registrado
+2026-05-04 16:22:00,503 | INFO | app.core.logger | 200. Producto reemplazado
+2026-05-04 16:22:38,833 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:22:48,317 | INFO | app.core.logger | 200. Producto reemplazado
+2026-05-04 16:22:50,941 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:25:22,331 | INFO | app.core.logger | 200. Producto reemplazado
+2026-05-04 16:25:46,680 | INFO | app.core.logger | 200. Producto reemplazado
+2026-05-04 16:25:57,954 | INFO | app.core.logger | 200. Producto reemplazado
+2026-05-04 16:29:38,379 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:29:44,749 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:32:46,111 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:45:04,703 | INFO | app.core.logger | 200. Usuario consultado
+2026-05-04 16:45:04,905 | INFO | app.core.logger | 200. Token generado
+2026-05-04 16:45:14,967 | INFO | app.core.logger | 200. Producto eliminado
+2026-05-04 16:45:17,604 | ERROR | app.core.logger | 404. Producto no encontrado
+2026-05-04 16:51:03,205 | INFO | app.core.logger | 200. Producto registrado
+2026-05-04 16:52:03,831 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:52:09,793 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 16:52:16,518 | INFO | app.core.logger | 200. Producto reemplazado
+2026-05-04 16:52:21,640 | INFO | app.core.logger | 200. Producto eliminado
+2026-05-04 16:53:55,090 | INFO | app.core.logger | 200. Producto registrado
+2026-05-04 16:55:21,216 | INFO | app.core.logger | 200. Producto eliminado
+2026-05-04 17:11:48,670 | INFO | app.core.logger | 200. Producto registrado
+2026-05-04 17:11:51,799 | ERROR | app.core.logger | 409. Producto repetido
+2026-05-04 17:11:53,072 | ERROR | app.core.logger | 409. Producto repetido
+2026-05-04 17:54:01,123 | INFO | app.core.logger | 200. Productos filtrados
+2026-05-04 18:01:42,828 | ERROR | app.core.logger | 409. Usuario ya existe
+2026-05-04 18:01:52,812 | ERROR | app.core.logger | 409. Usuario ya existe
+2026-05-04 18:01:56,870 | ERROR | app.core.logger | 409. Usuario ya existe
+2026-05-04 18:02:23,837 | ERROR | app.core.logger | 200. Usuario creado
+2026-05-04 18:19:58,612 | ERROR | app.core.logger | 401. Contraseña no es correcta
+2026-05-04 18:20:03,634 | ERROR | app.core.logger | 401. Contraseña no es correcta
+2026-05-04 18:20:22,904 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:20:30,583 | ERROR | app.core.logger | 409. Usuario ya existe
+2026-05-04 18:20:32,930 | ERROR | app.core.logger | 409. Usuario ya existe
+2026-05-04 18:20:40,406 | ERROR | app.core.logger | 409. Usuario ya existe
+2026-05-04 18:20:45,329 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:22:24,875 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:22:29,099 | INFO | app.core.logger | 200. Usuario registrado
+2026-05-04 18:23:44,384 | ERROR | app.core.logger | 409. Usuario ya existe
+2026-05-04 18:23:48,969 | ERROR | app.core.logger | 200. Usuario creado
+2026-05-04 18:25:07,520 | INFO | app.core.logger | 200. Usuario registrado
+2026-05-04 18:25:43,351 | ERROR | app.core.logger | 200. Usuario creado
+2026-05-04 18:25:50,744 | INFO | app.core.logger | 200. Usuario registrado
+2026-05-04 18:25:56,212 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:26:29,835 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:28:06,981 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:28:08,274 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:28:29,337 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:28:30,510 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:29:10,186 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:29:56,122 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:06,965 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:39,925 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:40,571 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:40,745 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:40,905 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:41,082 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:41,239 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:41,413 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:41,592 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:41,766 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:42,178 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:42,529 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:30:42,755 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:04,949 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:05,382 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:05,728 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:05,904 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:19,846 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:20,565 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:21,307 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:25,532 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:26,085 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:26,326 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:29,298 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:31:32,099 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:32:23,390 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:32:24,673 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:32:24,999 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:35:57,716 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:35:58,734 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:36:19,774 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:37:36,940 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:37:57,661 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:38:02,515 | ERROR | app.core.logger | 409. Usuario ya esta registrado
+2026-05-04 18:38:14,441 | ERROR | app.core.logger | 409. Usuario ya existe
+2026-05-04 18:38:19,899 | ERROR | app.core.logger | 200. Usuario creado
+2026-05-04 18:38:24,530 | INFO | app.core.logger | 200. Usuario registrado
+2026-05-04 18:38:30,315 | ERROR | app.core.logger | 401. Contraseña no es correcta
+2026-05-04 18:38:38,705 | INFO | app.core.logger | 200. Token generado
+2026-05-04 18:38:59,433 | ERROR | app.core.logger | 409. Producto repetido
+2026-05-04 18:39:03,518 | INFO | app.core.logger | 200. Producto registrado
