@@ -1,0 +1,35 @@
+# Entorno virtual (NUNCA va en Docker)
+venv/
+.env/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+logs/
+*.log
+
+# Git
+.git/
+.gitignore
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Tests (opcional)
+tests/
+
+# Archivos de desarrollo
+.vscode/
+.idea/
+
+# Docker innecesario dentro del build
+docker-compose.yml
+
+# Variables sensibles
+.env
