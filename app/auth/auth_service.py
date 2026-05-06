@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from app.schemas.usuarios_schema import UsuarioRegistro, UsuarioLogin
 from passlib.context import CryptContext
 from jose import jwt
-from app.core.config import SECRET_KEY, ALGORITHM, EXPIRACION_MINUTOS
+from app.core.config import SECRET_KEY, ALGORITHM
 from datetime import datetime, timedelta
 from app.core.logger import logger
 from app.repositories.usuarios_repositories import consultar_usuario_db, actualizar_usuario
@@ -12,7 +12,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def crear_token(data: dict):
     to_create = data.copy()
     
-    expire = datetime.utcnow() + timedelta(minutes=EXPIRACION_MINUTOS)
+    expire = datetime.utcnow() + timedelta(minutes=30)
 
     to_create.update({"exp": expire})
 

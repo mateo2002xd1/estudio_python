@@ -1,4 +1,8 @@
-from datetime import datetime
-SECRET_KEY = "mi_clave_super_secreta_123"
-ALGORITHM = "HS256"
-EXPIRACION_MINUTOS = 30
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
+DATABASE_URL = os.getenv("DATABASE_URL")
