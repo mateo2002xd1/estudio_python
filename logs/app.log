@@ -141,3 +141,4 @@
 2026-05-06 09:21:45,084 | INFO | app.core.logger | 200. Productos filtrados
 2026-05-06 09:21:56,910 | ERROR | app.core.logger | 401. Contraseña no es correcta
 2026-05-06 09:22:01,661 | INFO | app.core.logger | 200. Token generado
+2026-05-06 09:37:14,530 | INFO | app.core.logger | 200. Productos filtrados
